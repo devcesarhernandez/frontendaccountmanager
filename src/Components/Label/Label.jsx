@@ -5,6 +5,7 @@ const Label = (props) => {
 	return (
 		<label 
 			className={ className || "form-label"}
+			{ ...propsLabel }
 		>
 			{ children || "Label" }
 		</label>
