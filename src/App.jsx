@@ -4,16 +4,17 @@ import {
 	Route,
 } from "react-router-dom"
 import Auth from "./Routes/Auth/Auth"
-import Category from "./Routes/Categories/Category"
 import Platform from "./Routes/Platforms/Platform"
+import Category from "./Routes/Categories/Category"
+import SnackbarProvider from "./Context/SnackbarContext/SnackbarContext"
 
 function App() {
 	return (
-		<>
+		<SnackbarProvider>
 			<Auth />
 			<Category />
 			<Platform />
-		</>
+		</SnackbarProvider>
   	);
 }
 
