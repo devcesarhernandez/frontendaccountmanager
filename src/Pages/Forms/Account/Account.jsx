@@ -18,23 +18,23 @@ const options  = [
 ]
 
 const Account = (props) => {
-	const { value, password} = props
+	const { value, password, title, buttonText } = props
 	return (
 		<form>
-			<h2>Registar nueva cuenta</h2>
+			<h2>{ title || "Registar nueva cuenta"}</h2>
 			<div className="mb-3">
 				<Label htmlFor="email">Correo electronico</Label>
 				<Input type="email" id="email"/>
 			</div>
 			<div className="mb-3">
 				<Label htmlFor="password">Contraseña</Label>
-				<Input type="password" id="email"/>
+				<Input type="password" id="password"/>
 			</div>
 			<div className="mb-3">
 				<Label htmlFor="platform">Plataforma:</Label>
 				<Select id="category" options={options} />
 			</div>
-			<Button type="submit" className="btn btn-success w-100">Registrar plataforma</Button>
+			<Button type="submit" className="btn btn-success w-100">{ buttonText || "Registrar plataforma"}</Button>
 		</form>
 	)
 }
