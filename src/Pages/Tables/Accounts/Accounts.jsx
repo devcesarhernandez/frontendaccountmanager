@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Account from "../../Forms/Account/Account"
 import Button from "../../../Components/Button/Button"
+import { ModalContext, ButtonModal } from "../../../Context/ModalContext/ModalContext"
 
 const Accounts = props => {
+	const { handleModalProperties } = useContext(ModalContext)
+	const handleModal = () => {
+		handleModalProperties("Editar cuenta", <Account title="Editar cuenta" buttonText="Actualizar cuenta" />)
+	}
 	return (
 		<div className="table-responsive">
 			<table className="table table-striped">
@@ -24,7 +30,7 @@ const Accounts = props => {
 						</td>
 						<td>Correo electronico</td>
 						<td>
-							<Button className="btn btn-outline-info btn-sm me-2">Edit</Button>
+							<ButtonModal className="btn btn-outline-info btn-sm me-2">Edit</ButtonModal>
 							<Button className="btn btn-outline-danger btn-sm">Delete</Button>
 						</td>
 					</tr>
@@ -37,7 +43,7 @@ const Accounts = props => {
 						</td>
 						<td>Correo electronico</td>
 						<td>
-							<Button className="btn btn-outline-info btn-sm me-2">Edit</Button>
+							<ButtonModal className="btn btn-outline-info btn-sm me-2" onClick={ handleModal }>Edit</ButtonModal>
 							<Button className="btn btn-outline-danger btn-sm">Delete</Button>
 						</td>
 					</tr>
@@ -50,7 +56,7 @@ const Accounts = props => {
 						</td>
 						<td>Correo electronico</td>
 						<td>
-							<Button className="btn btn-outline-info btn-sm me-2">Edit</Button>
+							<ButtonModal className="btn btn-outline-info btn-sm me-2">Edit</ButtonModal>
 							<Button className="btn btn-outline-danger btn-sm">Delete</Button>
 						</td>
 					</tr>
