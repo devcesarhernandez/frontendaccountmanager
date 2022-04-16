@@ -1,0 +1,11 @@
+.bi {
+  vertical-align: -.125em;
+  pointer-events: none;
+  fill: currentColor;
+}
+
+@media (max-width: 575px){
+  .nav-flush .nav-link {
+    border-radius: 0;
+  }
+}
