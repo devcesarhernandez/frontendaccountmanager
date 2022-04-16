@@ -11,8 +11,8 @@ import Categories from "../../Pages/Tables/Categories/Categories"
 const Home = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<Dashboard />}>
-				<Route path="home" element={ <Accounts /> }></Route>
+			<Route path="/home" element={<Dashboard />}>
+				<Route index element={ <Accounts /> }></Route>
 				<Route path="accounts">
 					<Route index element={ <Accounts /> }></Route>
 					<Route path="create" element={ <AccoutForm /> }></Route>
