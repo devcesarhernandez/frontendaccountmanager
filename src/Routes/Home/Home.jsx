@@ -11,17 +11,17 @@ import Categories from "../../Pages/Tables/Categories/Categories"
 const Home = () => {
 	return (
 		<Routes>
-			<Route path="/home" element={<Dashboard />}>
-				<Route index element={ <Accounts /> }></Route>
-				<Route path="accounts">
+			<Route element={<Dashboard />}>
+				<Route path="/home" element={ <Accounts /> }></Route>
+				<Route path="/accounts">
 					<Route index element={ <Accounts /> }></Route>
 					<Route path="create" element={ <AccoutForm /> }></Route>
 				</Route>
-				<Route path="categories">
+				<Route path="/categories">
 					<Route index element={ <Categories /> }></Route>
 					<Route path="create" element={ <CategoryForm /> }></Route>
 				</Route>
-				<Route path="platforms">
+				<Route path="/platforms">
 					<Route index element={ <Platforms /> } />
 					<Route path="create" element={ <Create /> } />
 				</Route>
