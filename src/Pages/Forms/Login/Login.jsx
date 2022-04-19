@@ -6,8 +6,10 @@ import Button from "../../../Components/Button/Button"
 import login from "../../../Infrastructure/repositories/login"
 import { UserContext } from "../../../Context/UserContext/UserContext"
 import { SnackbarContext } from "../../../Context/SnackbarContext/SnackbarContext"
+import { useNavigate } from "react-router-dom"
 
 const Login = (props) => {
+	const navigate = useNavigate()
 	const [user, setUser] = useContext(UserContext)
 	const { handleOpenSnackbar } = useContext(SnackbarContext)
 	const [userLogin, setUserLogin] = useState({})
@@ -16,6 +18,7 @@ const Login = (props) => {
 		handleOpenSnackbar(res.message, res.ok ? "success" : "error")
 		if (res.ok) {
 			setUser({token: res.payload, logged: true})
+			navigate("/home")
 		}
 	}
 	return (
