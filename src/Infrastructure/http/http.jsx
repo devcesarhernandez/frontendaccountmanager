@@ -6,9 +6,16 @@ const get = async (url, token) => {
 			"token": token || ""
 		}
 	})
-	return response.json()
+	return !response.ok ? {ok: false, message: "Server error"} : response.json()
 }
 
+/**
+ * Esta funcion hace petiones POST
+ * @param {String} url La url de la petición
+ * @param {Object} body Recibe los datos a insertar en un objecto
+ * @param {String} token El token de sesión
+ * @returns {Object}
+ */
 const post = async (url, body, token) => {
 	const response = await fetch(url,{
 		method: "POST",
@@ -18,7 +25,7 @@ const post = async (url, body, token) => {
 			"token": token || ""
 		}
 	})
-	return await response.json()
+	return !response.ok ? {ok: false, message: "Server error"} : response.json()
 }
 
 const patch = async (url, body, token) => {
@@ -30,7 +37,7 @@ const patch = async (url, body, token) => {
 		},
 		body
 	})
-	return response.json()
+	return !response.ok ? {ok: false, message: "Server error"} : response.json()
 }
 
 const _delete = async (url, token) => {
@@ -41,7 +48,7 @@ const _delete = async (url, token) => {
 			"token": token || ""
 		}
 	})
-	return response.json()
+	return !response.ok ? {ok: false, message: "Server error"} : response.json()
 }
 
 export const http = {

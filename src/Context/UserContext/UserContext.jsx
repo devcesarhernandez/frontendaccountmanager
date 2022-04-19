@@ -13,7 +13,6 @@ const UserProvider = (props) => {
 		if ( user.logged ) {
 			setCookie("token", user.token)
 			setCookie("logged", user.logged)
-			navigate("/home")
 		} 
 	}, [user])
 
