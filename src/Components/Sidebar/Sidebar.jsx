@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Sidebar.css'
 import Link from "../Link/Link"
+import Button from "../Button/Button"
 import LinkActive from "../Link/LinkActive"
+import {UserContext} from "../../Context/UserContext/UserContext"
 
 const Sidebar = () => {
+	const [ user, setUser ] = useContext(UserContext)
+
+	const handleCloseSession = (e) => {
+		e.preventDefault()
+		setUser({
+			...user,
+			logged: false
+		})
+	}
+	
 	return (
 		<>
 			<svg xmlns="http://www.w3.org/2000/svg" style={{display: "none"}}>
@@ -159,12 +171,7 @@ const Sidebar = () => {
 						className="dropdown-menu text-small shadow"
 						aria-labelledby="dropdownUser2"
 					>
-						<li>
-							<a className="dropdown-item" href="#">
-								New project...
-							</a>
-						</li>
-						<li>
+						{/*<li>
 							<a className="dropdown-item" href="#">
 								Settings
 							</a>
@@ -176,11 +183,11 @@ const Sidebar = () => {
 						</li>
 						<li>
 							<hr className="dropdown-divider" />
-						</li>
+						</li>*/}
 						<li>
-							<a className="dropdown-item" href="#">
+							<Button className="dropdown-item" onClick={handleCloseSession} >
 								Sign out
-							</a>
+							</Button>
 						</li>
 					</ul>
 				</div>

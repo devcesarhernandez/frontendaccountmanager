@@ -3,7 +3,11 @@ const Cookies = document.cookie.split(";").reduce( (accum, cookie) => ({
 }), {})
 
 export const setCookie = (name, value) => {
-	document.cookie = `${name}=${value}`
+	document.cookie = `${name}=${value}; path=/`
+}
+
+export const deleteCookie = (name) => {
+	document.cookie = `${name}=; max-age=0; path=/`
 }
 
 export default Cookies
