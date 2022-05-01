@@ -1,38 +1,56 @@
-import React from "react"
+import React, { useState, useEffect, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import Label from "../../../Components/Label/Label"
 import Input from "../../../Components/Inputs/Input"
 import Select from "../../../Components/Inputs/Select"
 import Button from "../../../Components/Button/Button"
-
-const options  = [
-	{
-		_id: "alfjasjfoiwej879",
-		name: "GMail",
-		description: "djsaj sdjlasasjj ldj ffjls flsfj asfaslñ ",
-	},
-	{
-		_id: "sjflkasf46asde",
-		name: "Mega",
-		description: "djsaj sdjlasasjj ldj ffjls flsfj asfaslñ ",
-	}
-]
+import { UserContext } from "../../../Context/UserContext/UserContext"
+import getPlatforms from "../../../Infrastructure/repositories/getPlatforms"
+import { SnackbarContext } from "../../../Context/SnackbarContext/SnackbarContext"
+import createAccount from "../../../Infrastructure/repositories/createOrUpdateAccount"
 
 const Account = (props) => {
+	const { handleOpenSnackbar } = useContext( SnackbarContext )
 	const { value, password, title, buttonText } = props
+	const [ platforms, setPlatforms ] = useState([])
+	const [ account, setAccount ] = useState({})
+	const [ user ] = useContext( UserContext )
+	const navigate = useNavigate()
+
+	useEffect( async () => {
+		const res = await getPlatforms(user.token)
+		if ( res.ok ) setPlatforms(res.payload)
+		else handleOpenSnackbar(res.message, "error")
+	},[])
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		const res = await createAccount("post", account, user.token)
+		if ( res.ok ) navigate("/accounts")
+		handleOpenSnackbar(res.message, res.ok ? "success" : "error")
+	}
+
+	const handleDataAccount = (e) => {
+		setAccount({
+			...account,
+			[e.target.id]: e.target.value
+		})
+	}
+	
 	return (
-		<form>
+		<form onSubmit={handleSubmit}>
 			<h2>{ title || "Registar nueva cuenta"}</h2>
 			<div className="mb-3">
 				<Label htmlFor="email">Correo electronico</Label>
-				<Input type="email" id="email"/>
+				<Input type="email" id="email" onChange={handleDataAccount}/>
 			</div>
 			<div className="mb-3">
 				<Label htmlFor="password">Contraseña</Label>
-				<Input type="password" id="password"/>
+				<Input type="password" id="password" onChange={handleDataAccount}/>
 			</div>
 			<div className="mb-3">
-				<Label htmlFor="platform">Plataforma:</Label>
-				<Select id="category" options={options} />
+				<Label htmlFor="platformId">Plataforma:</Label>
+				<Select id="platformId" options={platforms} onChange={handleDataAccount}/>
 			</div>
 			<Button type="submit" className="btn btn-success w-100">{ buttonText || "Registrar plataforma"}</Button>
 		</form>
