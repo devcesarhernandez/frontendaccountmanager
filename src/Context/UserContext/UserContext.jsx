@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import {useNavigate, useLocation} from "react-router-dom"
-import Cookies, {setCookie} from "./Cookies"
+import Cookies, {setCookie, deleteCookie} from "./Cookies"
 import {protectedRoutes, onlyLoggedOut} from "./FilterRoutes"
 
 const UserProvider = (props) => {
@@ -13,7 +13,11 @@ const UserProvider = (props) => {
 		if ( user.logged ) {
 			setCookie("token", user.token)
 			setCookie("logged", user.logged)
-		} 
+		} else {
+			deleteCookie("token")
+			deleteCookie("logged")
+			navigate("/")
+		}
 	}, [user])
 
 	useEffect(() => {
